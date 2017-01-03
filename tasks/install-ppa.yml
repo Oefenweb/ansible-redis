@@ -10,6 +10,6 @@
 - name: install | ppa | latest
   apt:
     name: redis-server
-    state: latest
+    state: "{{ apt_install_state | default('latest') }}"
   tags:
     - redis-install-ppa-latest

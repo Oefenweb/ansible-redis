@@ -1,6 +1,6 @@
 # tasks file for redis
 ---
-- name: configure | init | update script
+- name: configure | initd | update script
   template:
     src: etc/init.d/redis-server.j2
     dest: "/etc/init.d/{{ redis_instance_service }}"

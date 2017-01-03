@@ -7,13 +7,13 @@
     owner: root
     group: root
     mode: 0644
-  register: update_systemd_script
+  register: _update_systemd_script
   notify: restart redis-server
   tags:
     - redis-configure-systemd-update
 
 - name: configure | systemd | reload
   command: systemctl daemon-reload
-  when: update_systemd_script | changed
+  when: _update_systemd_script | changed
   tags:
     - redis-configure-systemd-reload
