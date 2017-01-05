@@ -7,8 +7,11 @@ After=network.target
 [Service]
 Type=forking
 PermissionsStartOnly=true
-ExecStartPre=/bin/mkdir -p {{ redis_pidfile | dirname }}
-ExecStartPre=/bin/chown -R {{ redis_system_user }}:{{ redis_system_group }} {{ redis_pidfile | dirname }}
+ExecStartPre=/usr/bin/install -d \
+  -o {{ redis_system_user }} \
+  -g {{ redis_system_group }} \
+  -m 0755 \
+  {{ redis_pidfile | dirname }}
 {% if redis_transparent_hugepage != false %}
 {% for transparent_hugepage_file in redis_transparent_hugepage_files %}
 ExecStartPre=/bin/echo {{ redis_transparent_hugepage }} > {{ transparent_hugepage_file }}
