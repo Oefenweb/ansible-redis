@@ -5,7 +5,7 @@ galaxy_info:
   company: Oefenweb.nl B.V.
   description: Set up the latest stable redis server in Ubuntu systems (using Chris Lea's ppa or from source)
   license: BSD
-  min_ansible_version: 1.6
+  min_ansible_version: 1.9.6
   platforms:
     - name: Ubuntu
       versions:

@@ -2,14 +2,14 @@
 ---
 - hosts: all
   remote_user: vagrant
-  sudo: true
+  become: true
   roles:
     - role: ../../
       redis_install_method: 'src'
 
 - hosts: all
   remote_user: vagrant
-  sudo: true
+  become: true
   roles:
     - role: ../../
       redis_install_method: 'src'

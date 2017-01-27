@@ -2,13 +2,13 @@
 ---
 - hosts: localhost
   connection: local
-  sudo: true
+  become: true
   roles:
     - role: ../../
 
 - hosts: localhost
   connection: local
-  sudo: true
+  become: true
   roles:
     - role: ../../
       redis_instance_name: 'write-through'
