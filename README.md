@@ -13,7 +13,7 @@ None
 ##### Installation
 
 * `redis_install_method`: [default: `'ppa'`]: The installation method to use (e.g. `src`)
-* `redis_version`: [default: `3.2.6`]: Redis version to install (only applicable to `src` installs)
+* `redis_version`: [default: `3.2.7`]: Redis version to install (only applicable to `src` installs)
 
 ##### (Multiple) instances
 
