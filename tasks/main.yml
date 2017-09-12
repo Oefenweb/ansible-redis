@@ -43,7 +43,7 @@
     - redis-configure-version-get
 
 - include: configure-initd.yml
-  when: ansible_distribution_version | version_compare('15.04', '<')
+  when: ansible_service_mgr != 'systemd'
   tags:
     - configuration
     - redis
@@ -51,7 +51,7 @@
     - redis-configure-initd
 
 - include: configure-systemd.yml
-  when: ansible_distribution_version | version_compare('15.04', '>=')
+  when: ansible_service_mgr == 'systemd'
   tags:
     - configuration
     - redis
