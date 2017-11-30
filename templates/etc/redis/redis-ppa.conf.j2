@@ -46,6 +46,7 @@ include {{ redis_include }}
 #
 # loadmodule /path/to/my_module.so
 # loadmodule /path/to/other_module.so
+
 {% for redis_loadmodule in redis_loadmodules %}
 loadmodule {{ redis_loadmodule }}
 {% endfor %}
