@@ -43,7 +43,7 @@
     - redis-configure-version-get
 
 - include: configure-initd.yml
-  when: ansible_distribution_version | version_compare('15.04', '<')
+  when: ansible_service_mgr != 'systemd'
   tags:
     - configuration
     - redis
@@ -51,7 +51,7 @@
     - redis-configure-initd
 
 - include: configure-systemd.yml
-  when: ansible_distribution_version | version_compare('15.04', '>=')
+  when: ansible_service_mgr == 'systemd'
   tags:
     - configuration
     - redis
@@ -67,8 +67,8 @@
 - name: start and enable service
   service:
     name: "{{ redis_instance_service }}"
-    state: started
-    enabled: true
+    state: "{{ service_default_state | default('started') }}"
+    enabled: "{{ service_default_enabled | default(true) | bool }}"
   tags:
     - configuration
     - redis

@@ -4,3 +4,4 @@
   service:
     name: "{{ redis_instance_service }}"
     state: restarted
+  when: service_default_state | default('started') == 'started'
