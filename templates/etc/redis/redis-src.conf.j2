@@ -46,6 +46,9 @@ include {{ redis_include }}
 #
 # loadmodule /path/to/my_module.so
 # loadmodule /path/to/other_module.so
+{% for redis_loadmodule in redis_loadmodules %}
+loadmodule {{ redis_loadmodule }}
+{% endfor %}
 
 ################################## NETWORK #####################################
 
@@ -199,7 +202,7 @@ databases {{ redis_databases }}
 #
 # However it is possible to force the pre-4.0 behavior and always show a
 # ASCII art logo in startup logs by setting the following option to yes.
-always-show-logo yes
+always-show-logo {{ redis_always_show_logo | bool | ternary('yes', 'no') }}
 
 ################################ SNAPSHOTTING  ################################
 #
@@ -672,10 +675,10 @@ maxmemory-samples {{ redis_maxmemory_samples }}
 # in order to instead release memory in a non-blocking way like if UNLINK
 # was called, using the following configuration directives:
 
-lazyfree-lazy-eviction no
-lazyfree-lazy-expire no
-lazyfree-lazy-server-del no
-slave-lazy-flush no
+lazyfree-lazy-eviction {{ redis_lazyfree_lazy_eviction | bool | ternary('yes', 'no') }}
+lazyfree-lazy-expire {{ redis_lazyfree_lazy_expire | bool | ternary('yes', 'no') }}
+lazyfree-lazy-server-del {{ redis_lazyfree_lazy_server_del | bool | ternary('yes', 'no') }}
+slave-lazy-flush {{ redis_slave_lazy_flush | bool | ternary('yes', 'no') }}
 
 ############################## APPEND ONLY MODE ###############################
 
@@ -807,7 +810,7 @@ aof-load-truncated {{ 'yes' if redis_aof_load_truncated else 'no' }}
 #
 # This is currently turned off by default in order to avoid the surprise
 # of a format change, but will at some point be used as the default.
-aof-use-rdb-preamble no
+aof-use-rdb-preamble {{ redis_aof_use_rdb_preamble | bool | ternary('yes', 'no') }}
 
 ################################ LUA SCRIPTING  ###############################
 
@@ -1254,8 +1257,16 @@ aof-rewrite-incremental-fsync {{ 'yes' if redis_aof_rewrite_incremental_fsync el
 # The default value for the lfu-decay-time is 1. A Special value of 0 means to
 # decay the counter every time it happens to be scanned.
 #
+{% if redis_lfu_log_factor is defined %}
+lfu-log-factor {{ redis_lfu_log_factor }}
+{% else %}
 # lfu-log-factor 10
+{% endif %}
+{% if redis_lfu_decay_time is defined %}
+lfu-decay-time {{ redis_lfu_decay_time }}
+{% else %}
 # lfu-decay-time 1
+{% endif %}
 
 ########################### ACTIVE DEFRAGMENTATION #######################
 #
@@ -1302,19 +1313,43 @@ aof-rewrite-incremental-fsync {{ 'yes' if redis_aof_rewrite_incremental_fsync el
 # a good idea to leave the defaults untouched.
 
 # Enabled active defragmentation
+{% if redis_active_defrag is defined %}
+activedefrag {{ redis_active_defrag | bool | ternary('yes', 'no') }}
+{% else %}
 # activedefrag yes
+{% endif %}
 
 # Minimum amount of fragmentation waste to start active defrag
+{% if redis_active_defrag_ignore_bytes is defined %}
+active-defrag-ignore-bytes {{ redis_active_defrag_ignore_bytes }}
+{% else %}
 # active-defrag-ignore-bytes 100mb
+{% endif %}
 
 # Minimum percentage of fragmentation to start active defrag
+{% if redis_active_defrag_threshold_lower is defined %}
+active-defrag-threshold-lower {{ redis_active_defrag_threshold_lower }}
+{% else %}
 # active-defrag-threshold-lower 10
+{% endif %}
 
 # Maximum percentage of fragmentation at which we use maximum effort
+{% if redis_active_defrag_threshold_upper is defined %}
+active-defrag-threshold-upper {{ redis_active_defrag_threshold_upper }}
+{% else %}
 # active-defrag-threshold-upper 100
+{% endif %}
 
 # Minimal effort for defrag in CPU percentage
+{% if redis_active_defrag_cycle_min is defined %}
+active-defrag-cycle-min {{ redis_active_defrag_cycle_min }}
+{% else %}
 # active-defrag-cycle-min 25
+{% endif %}
 
 # Maximal effort for defrag in CPU percentage
+{% if redis_active_defrag_cycle_max is defined %}
+active-defrag-cycle-max {{ redis_active_defrag_cycle_max }}
+{% else %}
 # active-defrag-cycle-max 75
+{% endif %}

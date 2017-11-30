@@ -21,7 +21,8 @@ None
 
 ##### Configuration
 
-* `redis_include`: [default: `[]`]: (e.g. `['/path/to/local.conf', '/path/to/other.conf']`) 
+* `redis_include`: [default: `[]`]: Other config files to include (e.g. `['/path/to/local.conf', '/path/to/other.conf']`) 
+* `redis_loadmodules`: [default: `[]`]: Modules to load at startup (e.g. `['/path/to/my_module.so', '/path/to/other_module.so']`) (`>= 4.0.0` only)
 * `redis_bind`: [default: `['127.0.0.1']`]: Listen for connections form the specified IP addresses
 * `redis_protected_mode`: [default: `true`]: By default protected mode is enabled. You should disable it only if you are sure you want clients from other hosts to connect to Redis even if no authentication is configured, nor a specific set of interfaces are explicitly listed using the `bind` directive (`>= 3.2` only)
 * `redis_port`: [default: `6379`]: Accept connections on the specified port
@@ -38,6 +39,7 @@ None
 * `redis_syslog_ident`: [default: `{{ redis_instance_name_full }}`]: The syslog identity
 * `redis_syslog_facility`: [default: `local0`]: The syslog facility (e.g. `USER` or between `LOCAL0-LOCAL7`)
 * `redis_databases`: [default: `16`]: The number of databases
+* `redis_always_show_logo`: [default: `true`]: Force the pre-4.0 behavior and always show a ASCII art logo in startup logs (`>= 4.0.0` only)
 * `redis_saves`: [default: `[{seconds: 900, changes: 1}, {seconds: 300, changes: 10}, {seconds: 60, changes: 10000}]`]: Saves declaration
 * `redis_saves.{n}.seconds`: [required]: Will save the DB if the given number of seconds have passed
 * `redis_saves.{n}.changes`: [required]: Will save the DB if the given number of write operations against the DB occurred
@@ -73,6 +75,10 @@ None
 * `redis_maxmemory`: [optional]: Don't use more memory than the specified amount of bytes
 * `redis_maxmemory_policy`: [default: `noeviction`]: How the server will select what to remove when `redis_maxmemory` is reached (e.g. `volatile-lru`, `allkeys-lru`, `volatile-random`, `allkeys-random`, `volatile-ttl`)
 * `redis_maxmemory_samples`: [default: `5`]: `LRU` and minimal `TTL` algorithms are not precise algorithms but approximated algorithms, so you can tune it for speed or accuracy. By default the server will check `N` keys and pick the one that was used less recently
+* `redis_lazyfree_lazy_eviction`: [default: `false`]: (`>= 4.0.0` only)
+* `redis_lazyfree_lazy_expire`: [default: `false`]: (`>= 4.0.0` only)
+* `redis_lazyfree_lazy_server_del`: [default: `false`]: (`>= 4.0.0` only)
+* `redis_slave_lazy_flush`: [default: `false`]: (`>= 4.0.0` only)
 * `redis_appendonly`: [default: `false`]: Whether or not to use [Append Only File](http://redis.io/topics/persistence)
 * `redis_appendfilename`: [default: `appendonly.aof`]: The name of the append only file
 * `redis_appendfsync`: [default: `everysec`]: The [fsync](http://antirez.com/post/redis-persistence-demystified.html) setting that the server will use (e.g. `everysec`, `always` or `no`)
@@ -103,6 +109,14 @@ None
 * `redis_client_output_buffer_limits.{n}.soft_seconds`: [required]: (e.g. `60`)
 * `redis_hz`: [default: `10`]: The frequency in which the server calls an internal function to perform many background tasks, like closing connections of clients in timeout, purging expired keys that are never requested, and so forth. The range is between `1` and `500`, however a value over `100` is usually not a good idea. Most users should use the default of `10` and raise this up to `100` only in environments where very low latency is required
 * `redis_aof_rewrite_incremental_fsync`: [default: `true`]: When a child rewrites the AOF file, if the following option is enabled the file will be fsync-ed every 32 MB of data generated. This is useful in order to commit the file to the disk more incrementally and avoid big latency spikes
+* `redis_lfu_log_factor`: [optional]: (e.g. `10`, `>= 4.0.0` only)
+* `redis_lfu_decay_time`: [optional]: (e.g. `1`, `>= 4.0.0` only)
+* `redis_active_defrag`: [optional]: Enabled active defragmentation (e.g. `true`, `>= 4.0.0` only)
+* `redis_active_defrag_ignore_bytes`: [optional]: Minimum amount of fragmentation waste to start active defrag (e.g. `100mb`, `>= 4.0.0` only)
+* `redis_active_defrag_threshold_lower`: [optional]: Minimum percentage of fragmentation to start active defrag (e.g. `10`, `>= 4.0.0` only)
+* `redis_active_defrag_threshold_upper`: [optional]: Maximum percentage of fragmentation at which we use maximum effort (e.g. `100`, `>= 4.0.0` only)
+* `redis_active_defrag_cycle_min`: [optional]: Minimal effort for defrag in CPU percentage (e.g. `25`, `>= 4.0.0` only)
+* `redis_active_defrag_cycle_max`: [optional]: Maximal effort for defrag in CPU percentage (e.g. `75`, `>= 4.0.0` only)
 
 ##### Kernel
 
