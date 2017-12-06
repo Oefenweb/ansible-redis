@@ -1,7 +1,7 @@
 # defaults file for redis
 ---
 redis_install_method: 'ppa'
-redis_version: 4.0.5
+redis_version: 4.0.6
 
 redis_instance_name: ''
 
