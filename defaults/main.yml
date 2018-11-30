@@ -13,7 +13,7 @@ redis_protected_mode: true
 redis_port: 6379
 redis_tcp_backlog: 511
 redis_timeout: 0
-redis_tcp_keepalive: "{{ 300 if redis_install_method == 'src' and redis_version | version_compare('3.2.1', '>=') else 60 }}"
+redis_tcp_keepalive: "{{ 300 if redis_install_method == 'src' and redis_version is version('3.2.1', '>=') else 60 }}"
 redis_daemonize: true
 redis_pidfile: "/var/run/redis/{{ redis_instance_service }}.pid"
 redis_loglevel: notice

@@ -36,7 +36,7 @@
   command: make -j{{ ansible_processor_cores + 1 }}
   args:
     chdir: "{{ redis_checkout_path }}"
-  when: git_checkout | changed
+  when: git_checkout is changed
   tags:
     - redis-install-src-build
 
@@ -51,7 +51,7 @@
   command: make PREFIX=/usr install
   args:
     chdir: "{{ redis_checkout_path }}"
-  when: git_checkout | changed
+  when: git_checkout is changed
   notify: restart redis-server
   tags:
     - redis-install-src-install
@@ -70,6 +70,6 @@
   shell: git reset --hard && git clean -d -x -f
   args:
     chdir: "{{ redis_checkout_path }}"
-  when: git_checkout | changed
+  when: git_checkout is changed
   tags:
     - redis-install-src-cleanup
