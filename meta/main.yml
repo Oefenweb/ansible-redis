@@ -1,7 +1,7 @@
-# meta file for memcached
+# meta file for redis
 ---
 galaxy_info:
-  role_name: memcached
+  role_name: redis
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
   description: Set up the latest stable redis server in Ubuntu systems (using Chris Lea's ppa or from source)
@@ -17,5 +17,5 @@ galaxy_info:
     - system
     - web
     - database
-    - database:nosql
+    - nosql
 dependencies: []
