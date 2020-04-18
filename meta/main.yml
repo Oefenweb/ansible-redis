@@ -1,6 +1,7 @@
 # meta file for memcached
 ---
 galaxy_info:
+  role_name: memcached
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
   description: Set up the latest stable redis server in Ubuntu systems (using Chris Lea's ppa or from source)
