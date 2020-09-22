@@ -1,4 +1,4 @@
-; {{ ansible_managed }}, {{ redis_binary_version.stdout }}
+; {{ ansible_managed }}, {{ _redis_binary_version.stdout }}
 
 [Unit]
 Description={{ redis_instance_service }} - Persistent key-value db
@@ -12,7 +12,7 @@ ExecStartPre=/usr/bin/install -d \
   -g {{ redis_system_group }} \
   -m 0755 \
   {{ redis_pidfile | dirname }}
-{% if redis_transparent_hugepage != false %}
+{% if redis_transparent_hugepage %}
 {% for transparent_hugepage_file in redis_transparent_hugepage_files %}
 ExecStartPre=/bin/echo {{ redis_transparent_hugepage }} > {{ transparent_hugepage_file }}
 {% endfor %}

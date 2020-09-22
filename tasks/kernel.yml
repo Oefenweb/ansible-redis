@@ -3,9 +3,9 @@
 - name: kernel | set system overcommit policy
   sysctl:
     name: vm.overcommit_memory
-    value: "{{ redis_vm_overcommit_memory }}"
+    value: "{{ redis_vm_overcommit_memory | string }}"
     reload: true
     state: present
-  when: redis_vm_overcommit_memory != false
+  when: redis_vm_overcommit_memory
   tags:
     - redis-kernel-vm-overcommit-memory

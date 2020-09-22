@@ -1,6 +1,7 @@
 ## redis
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-redis.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-redis) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-redis-blue.svg)](https://galaxy.ansible.com/Oefenweb/redis)
+[![Build Status](https://travis-ci.org/Oefenweb/ansible-redis.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-redis)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-redis-blue.svg)](https://galaxy.ansible.com/Oefenweb/redis)
 
 Set up the latest stable redis server in Ubuntu systems (using [Chris Lea's ppa](https://launchpad.net/~chris-lea/+archive/ubuntu/redis-server) or from source).
 
@@ -21,7 +22,7 @@ None
 
 ##### Configuration
 
-* `redis_include`: [default: `[]`]: Other config files to include (e.g. `['/path/to/local.conf', '/path/to/other.conf']`) 
+* `redis_include`: [default: `[]`]: Other config files to include (e.g. `['/path/to/local.conf', '/path/to/other.conf']`)
 * `redis_loadmodules`: [default: `[]`]: Modules to load at startup (e.g. `['/path/to/my_module.so', '/path/to/other_module.so']`) (`>= 4.0.0` only)
 * `redis_bind`: [default: `['127.0.0.1']`]: Listen for connections form the specified IP addresses
 * `redis_protected_mode`: [default: `true`]: By default protected mode is enabled. You should disable it only if you are sure you want clients from other hosts to connect to Redis even if no authentication is configured, nor a specific set of interfaces are explicitly listed using the `bind` directive (`>= 3.2` only)

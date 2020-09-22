@@ -2,11 +2,10 @@
 ---
 - name: install | src | dependencies
   apt:
-    name: "{{ item }}"
+    name: "{{ redis_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
-  with_items: "{{ redis_dependencies }}"
   tags:
     - redis-install-src-dependencies
 
@@ -27,16 +26,17 @@
     dest: "{{ redis_checkout_path }}"
     version: "{{ redis_version }}"
     force: true
-  register: git_checkout
+  register: _git_checkout
   tags:
     - redis-install-src-dependencies-checkout
     - redis-install-src-dependencies-checkout-repository
 
 - name: install | src | make
-  command: make -j{{ ansible_processor_cores + 1 }}
+  command: >
+    make -j{{ ansible_processor_cores + 1 }}
   args:
     chdir: "{{ redis_checkout_path }}"
-  when: git_checkout is changed
+  when: _git_checkout is changed
   tags:
     - redis-install-src-build
 
@@ -48,10 +48,11 @@
     - redis-install-src-remove-distro
 
 - name: install | src | install
-  command: make PREFIX=/usr install
+  command: >
+    make PREFIX=/usr install
   args:
     chdir: "{{ redis_checkout_path }}"
-  when: git_checkout is changed
+  when: _git_checkout is changed
   notify: restart redis-server
   tags:
     - redis-install-src-install
@@ -67,9 +68,10 @@
     - redis-install-src-user
 
 - name: install | src | cleanup build
-  shell: git reset --hard && git clean -d -x -f
+  shell: >
+    git reset --hard && git clean -d -x -f
   args:
     chdir: "{{ redis_checkout_path }}"
-  when: git_checkout is changed
+  when: _git_checkout is changed
   tags:
     - redis-install-src-cleanup

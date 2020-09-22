@@ -3,12 +3,12 @@
 - name: configure | stat directories
   stat:
     path: "{{ item }}/"
-  register: stat_directories
+  register: _stat_directories
   with_items:
     - "{{ redis_configuration_file | dirname }}"
     - "{{ redis_logfile | dirname }}"
     - "{{ redis_dir }}"
-  when: item != ''
+  when: item | length
   tags:
     - redis-configure-directories
     - redis-configure-directories-stat
@@ -20,8 +20,10 @@
     owner: "{{ redis_system_user }}"
     group: "{{ redis_system_group }}"
     mode: 0755
-  with_items: "{{ stat_directories.results }}"
-  when: item.stat is defined and item.stat.exists == false
+  with_items: "{{ _stat_directories.results }}"
+  when:
+    - item.stat is defined
+    - not item.stat.exists
   tags:
     - redis-configure-directories
     - redis-configure-directories-create

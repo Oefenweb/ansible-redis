@@ -18,7 +18,7 @@ redis_install_methods_supported:
   - 'src'
 
 redis_dependencies:
-  - git-core
+  - git
   - build-essential
 
 redis_checkout_path: /var/lib/ansible/redis/checkouts/redis

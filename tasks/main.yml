@@ -33,8 +33,9 @@
     - redis-configure
 
 - name: configure | version | get
-  command: redis-server --version
-  register: redis_binary_version
+  command: >
+    redis-server --version
+  register: _redis_binary_version
   changed_when: false
   tags:
     - configuration
