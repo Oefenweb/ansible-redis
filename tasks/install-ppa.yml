@@ -1,4 +1,4 @@
-# tasks file for redis
+# tasks file
 ---
 - name: install | ppa | add repository and install its signing key
   apt_repository:

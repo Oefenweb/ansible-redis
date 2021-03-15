@@ -1,4 +1,4 @@
-# vars file for redis
+# vars file
 ---
 redis_system_user: redis
 redis_system_group: redis

@@ -1,4 +1,4 @@
-# defaults file for redis
+# defaults file
 ---
 redis_install_method: 'ppa'
 redis_version: 4.0.10

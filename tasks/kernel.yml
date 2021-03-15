@@ -1,4 +1,4 @@
-# tasks file for redis
+# tasks file
 ---
 - name: kernel | set system overcommit policy
   sysctl:
