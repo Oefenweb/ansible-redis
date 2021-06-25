@@ -13,3 +13,6 @@
     - role: ../../
       redis_instance_name: 'write-through'
       redis_port: 6380
+  post_tasks:
+    - name: include tasks
+      include: "{{ playbook_dir }}/tasks/post.yml"

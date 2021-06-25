@@ -1,16 +1,25 @@
 # tasks file
 ---
-- name: install | ppa | add repository and install its signing key
+- name: install | ppa | dependencies (pre)
+  apt:
+    name: "{{ redis_ppa_dependencies_pre }}"
+    state: "{{ apt_install_state | default('latest') }}"
+    update_cache: true
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
+  tags:
+    - redis-install-ppa-dependencies
+
+- name: install | ppa | add repository and its signing key
   apt_repository:
-    repo: 'ppa:chris-lea/redis-server'
+    repo: "{{ redis_ppa }}"
     update_cache: true
     mode: 0644
   tags:
     - redis-install-ppa-add-repository
 
-- name: install | ppa | latest
+- name: install | ppa | dependencies
   apt:
-    name: redis-server
+    name: "{{ redis_ppa_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
   tags:
-    - redis-install-ppa-latest
+    - redis-install-ppa-dependencies

@@ -17,3 +17,6 @@
       redis_port: 6380
       redis_limit_no_file: 65536
       redis_transparent_hugepage: never
+  post_tasks:
+    - name: include tasks
+      include: "{{ playbook_dir }}/tasks/post.yml"
