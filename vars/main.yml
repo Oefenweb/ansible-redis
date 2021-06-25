@@ -17,6 +17,13 @@ redis_install_methods_supported:
   - 'ppa'
   - 'src'
 
+redis_ppa: 'ppa:chris-lea/redis-server'
+redis_ppa_dependencies_pre:
+  - software-properties-common
+  - dirmngr
+redis_ppa_dependencies:
+  - redis-server
+
 redis_dependencies:
   - git
   - build-essential

@@ -1,0 +1,27 @@
+# post test file
+---
+- name: test redis installation
+  shell: >
+    echo "PING"
+    | redis-cli -p 6379
+    | grep -q 'PONG'
+    && (echo 'Availability test: pass' && exit 0)
+    || (echo 'Availability test: fail' && exit 1)
+  args:
+    warn: false
+  changed_when: false
+  tags:
+    - skip_ansible_lint
+
+- name: test redis installation
+  shell: >
+    echo "PING"
+    | redis-cli -p 6380
+    | grep -q 'PONG'
+    && (echo 'Availability test: pass' && exit 0)
+    || (echo 'Availability test: fail' && exit 1)
+  args:
+    warn: false
+  changed_when: false
+  tags:
+    - skip_ansible_lint

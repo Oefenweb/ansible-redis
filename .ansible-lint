@@ -1,2 +1,5 @@
-skip_list:
-  - '303'
+---
+warn_list:
+  - '106'
+  - no-handler
+  - command-instead-of-module

@@ -1,0 +1,14 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  roles:
+    - role: ../../../
+
+- name: Converge
+  hosts: all
+  become: true
+  roles:
+    - role: ../../../
+      redis_instance_name: 'write-through'
+      redis_port: 6380
