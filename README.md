@@ -1,6 +1,6 @@
 ## redis
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-redis.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-redis)
+[![CI](https://github.com/Oefenweb/ansible-redis/workflows/CI/badge.svg)](https://github.com/Oefenweb/ansible-redis/actions?query=workflow%3ACI)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-redis-blue.svg)](https://galaxy.ansible.com/Oefenweb/redis)
 
 Set up the latest stable redis server in Ubuntu systems (using [Chris Lea's ppa](https://launchpad.net/~chris-lea/+archive/ubuntu/redis-server) or from source).
