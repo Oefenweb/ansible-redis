@@ -37,6 +37,7 @@
   args:
     chdir: "{{ redis_checkout_path }}"
   when: _git_checkout is changed
+  changed_when: true
   tags:
     - redis-install-src-build
 
@@ -53,6 +54,7 @@
   args:
     chdir: "{{ redis_checkout_path }}"
   when: _git_checkout is changed
+  changed_when: true
   notify: restart redis-server
   tags:
     - redis-install-src-install
@@ -63,7 +65,7 @@
     comment: 'redis server'
     home: /nonexistent
     ansible.builtin.shell: /bin/false
-    system: yes
+    system: true
   tags:
     - redis-install-src-user
 
