@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: configure | systemd | update script
-  template:
+  ansible.builtin.template:
     src: etc/systemd/system/redis-server.service.j2
     dest: "/etc/systemd/system/{{ redis_instance_service }}.service"
     owner: root
@@ -13,7 +13,7 @@
     - redis-configure-systemd-update
 
 - name: configure | systemd | reload
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
   when: _update_systemd_script is changed
   tags:

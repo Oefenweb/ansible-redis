@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: install | src | dependencies
-  apt:
+  ansible.builtin.apt:
     name: "{{ redis_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
@@ -10,7 +10,7 @@
     - redis-install-src-dependencies
 
 - name: install | src | create (checkout) directory
-  file:
+  ansible.builtin.file:
     path: "{{ redis_checkout_path }}"
     state: directory
     owner: root
@@ -21,7 +21,7 @@
     - redis-install-src-dependencies-checkout-directory
 
 - name: install | src | checkout repository
-  git:
+  ansible.builtin.git:
     repo: https://github.com/antirez/redis.git
     dest: "{{ redis_checkout_path }}"
     version: "{{ redis_version }}"
@@ -32,7 +32,7 @@
     - redis-install-src-dependencies-checkout-repository
 
 - name: install | src | make
-  command: >
+  ansible.builtin.command: >
     make -j{{ ansible_processor_cores + 1 }}
   args:
     chdir: "{{ redis_checkout_path }}"
@@ -41,14 +41,14 @@
     - redis-install-src-build
 
 - name: install | src | remove (distro version)
-  apt:
+  ansible.builtin.apt:
     name: redis-server
     state: absent
   tags:
     - redis-install-src-remove-distro
 
 - name: install | src | install
-  command: >
+  ansible.builtin.command: >
     make PREFIX=/usr install
   args:
     chdir: "{{ redis_checkout_path }}"
@@ -58,17 +58,17 @@
     - redis-install-src-install
 
 - name: install | src | add redis user
-  user:
+  ansible.builtin.user:
     name: "{{ redis_system_user }}"
     comment: 'redis server'
     home: /nonexistent
-    shell: /bin/false
+    ansible.builtin.shell: /bin/false
     system: yes
   tags:
     - redis-install-src-user
 
 - name: install | src | cleanup build
-  shell: >
+  ansible.builtin.shell: >
     git reset --hard && git clean -d -x -f
   args:
     chdir: "{{ redis_checkout_path }}"
