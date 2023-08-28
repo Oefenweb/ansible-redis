@@ -64,7 +64,7 @@
     name: "{{ redis_system_user }}"
     comment: 'redis server'
     home: /nonexistent
-    ansible.builtin.shell: /bin/false
+    shell: /bin/false
     system: true
   tags:
     - redis-install-src-user
@@ -75,5 +75,6 @@
   args:
     chdir: "{{ redis_checkout_path }}"
   when: _git_checkout is changed
+  changed_when: true
   tags:
     - redis-install-src-cleanup
