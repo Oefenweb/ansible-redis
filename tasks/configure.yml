@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: configure | stat directories
-  stat:
+  ansible.builtin.stat:
     path: "{{ item }}/"
   register: _stat_directories
   with_items:
@@ -14,7 +14,7 @@
     - redis-configure-directories-stat
 
 - name: configure | create directories
-  file:
+  ansible.builtin.file:
     path: "{{ item.item }}"
     state: directory
     owner: "{{ redis_system_user }}"
@@ -29,7 +29,7 @@
     - redis-configure-directories-create
 
 - name: configure | update configuration file(s)
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: root

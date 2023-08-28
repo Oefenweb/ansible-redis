@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: kernel | set system overcommit policy
-  sysctl:
+  ansible.posix.sysctl:
     name: vm.overcommit_memory
     value: "{{ redis_vm_overcommit_memory | string }}"
     reload: true

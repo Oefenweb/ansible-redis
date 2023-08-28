@@ -19,4 +19,4 @@
       redis_transparent_hugepage: never
   post_tasks:
     - name: include tasks
-      include: "{{ playbook_dir }}/tasks/post.yml"
+      ansible.builtin.import_tasks: "{{ playbook_dir }}/tasks/post.yml"

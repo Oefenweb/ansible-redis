@@ -15,4 +15,4 @@
       redis_port: 6380
   post_tasks:
     - name: include tasks
-      include: "{{ playbook_dir }}/tasks/post.yml"
+      ansible.builtin.import_tasks: "{{ playbook_dir }}/tasks/post.yml"

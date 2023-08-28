@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: install | method | check
-  fail:
+  ansible.builtin.fail:
     msg: "Install method {{ redis_install_method }} is not supported"
   when: redis_install_method | string not in redis_install_methods_supported
   tags:
@@ -10,7 +10,8 @@
     - redis-install-method
     - redis-install-method-check
 
-- include: install-ppa.yml
+- name: install ppa
+  ansible.builtin.import_tasks: install-ppa.yml
   when: redis_install_method == 'ppa'
   tags:
     - configuration
@@ -18,7 +19,8 @@
     - redis-install
     - redis-install-ppa
 
-- include: install-src.yml
+- name: install src
+  ansible.builtin.import_tasks: install-src.yml
   when: redis_install_method != 'ppa'
   tags:
     - configuration
@@ -26,14 +28,15 @@
     - redis-install
     - redis-install-src
 
-- include: configure.yml
+- name: configure
+  ansible.builtin.import_tasks: configure.yml
   tags:
     - configuration
     - redis
     - redis-configure
 
 - name: configure | version | get
-  command: >
+  ansible.builtin.command: >
     redis-server --version
   register: _redis_binary_version
   changed_when: false
@@ -43,7 +46,8 @@
     - redis-configure
     - redis-configure-version-get
 
-- include: configure-initd.yml
+- name: configure initd
+  ansible.builtin.import_tasks: configure-initd.yml
   when: ansible_service_mgr != 'systemd'
   tags:
     - configuration
@@ -51,7 +55,8 @@
     - redis-configure
     - redis-configure-initd
 
-- include: configure-systemd.yml
+- name: configure systemd
+  ansible.builtin.import_tasks: configure-systemd.yml
   when: ansible_service_mgr == 'systemd'
   tags:
     - configuration
@@ -59,14 +64,15 @@
     - redis-configure
     - redis-configure-systemd
 
-- include: kernel.yml
+- name: kernel
+  ansible.builtin.import_tasks: kernel.yml
   tags:
     - configuration
     - redis
     - redis-kernel
 
 - name: start and enable service
-  service:
+  ansible.builtin.service:
     name: "{{ redis_instance_service }}"
     state: "{{ service_default_state | default('started') }}"
     enabled: "{{ service_default_enabled | default(true) | bool }}"
