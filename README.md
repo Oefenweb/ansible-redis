@@ -142,7 +142,7 @@ None
 ---
 - hosts: all
   roles:
-    - redis
+    - oefenweb.redis
 ```
 
 ##### Multiple instances
@@ -151,13 +151,13 @@ None
 ---
 - hosts: all
   roles:
-    - role: redis
+    - role: oefenweb.redis
       redis_instance_name: 'write-through'
       redis_port: 6380
 
 - hosts: all
   roles:
-    - role: redis
+    - role: oefenweb.redis
       redis_instance_name: 'queue'
       redis_port: 6381
 ```
