@@ -6,7 +6,7 @@
     dest: "/etc/systemd/system/{{ redis_instance_service }}.service"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   register: _update_systemd_script
   notify: restart redis-server
   tags:

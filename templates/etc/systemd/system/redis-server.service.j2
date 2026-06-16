@@ -1,4 +1,4 @@
-; {{ ansible_managed }}, {{ _redis_binary_version.stdout }}
+{{ ansible_managed | comment(decoration='; ') }}, {{ _redis_binary_version.stdout }}
 
 [Unit]
 Description={{ redis_instance_service }} - Persistent key-value db

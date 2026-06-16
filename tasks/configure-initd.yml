@@ -6,7 +6,7 @@
     dest: "/etc/init.d/{{ redis_instance_service }}"
     owner: root
     group: root
-    mode: 0755
+    mode: '0755'
   notify: restart redis-server
   tags:
     - redis-configure-initd-update
