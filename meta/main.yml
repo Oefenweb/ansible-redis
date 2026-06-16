@@ -1,9 +1,8 @@
 # meta file
 ---
 galaxy_info:
-  namespace: oefenweb
+  author: oefenweb
   role_name: redis
-  author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
   description: Set up the latest stable redis server in Ubuntu systems (using Chris Lea's ppa or from source)
   license: BSD
@@ -11,9 +10,10 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - xenial
         - bionic
         - focal
+        - jammy
+        - noble
   galaxy_tags:
     - system
     - web

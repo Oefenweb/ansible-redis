@@ -8,7 +8,7 @@
     - "{{ redis_configuration_file | dirname }}"
     - "{{ redis_logfile | dirname }}"
     - "{{ redis_dir }}"
-  when: item | length
+  when: item | length > 0
   tags:
     - redis-configure-directories
     - redis-configure-directories-stat
@@ -19,7 +19,7 @@
     state: directory
     owner: "{{ redis_system_user }}"
     group: "{{ redis_system_group }}"
-    mode: 0755
+    mode: '0755'
   with_items: "{{ _stat_directories.results }}"
   when:
     - item.stat is defined
@@ -34,7 +34,7 @@
     dest: "{{ item.dest }}"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   with_items:
     - src: "etc/redis/redis-{{ redis_install_method }}.conf.j2"
       dest: "{{ redis_configuration_file }}"

@@ -1,6 +1,6 @@
 #! /bin/sh
 #
-# {{ ansible_managed }}, {{ _redis_binary_version.stdout }}
+{{ ansible_managed | comment }}, {{ _redis_binary_version.stdout }}
 #
 ### BEGIN INIT INFO
 # Provides:		{{ redis_instance_service }}

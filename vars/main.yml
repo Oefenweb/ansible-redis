@@ -17,10 +17,11 @@ redis_install_methods_supported:
   - 'ppa'
   - 'src'
 
-redis_ppa: 'ppa:chris-lea/redis-server'
 redis_ppa_dependencies_pre:
   - software-properties-common
   - dirmngr
+  - gnupg
+  - gpg-agent
 redis_ppa_dependencies:
   - redis-server
 
