@@ -1,0 +1,3 @@
+# vars file
+---
+redis_ppa: 'ppa:chris-lea/redis-server'
