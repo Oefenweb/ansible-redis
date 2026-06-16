@@ -3,7 +3,7 @@
 [![CI](https://github.com/Oefenweb/ansible-redis/workflows/CI/badge.svg)](https://github.com/Oefenweb/ansible-redis/actions?query=workflow%3ACI)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-redis-blue.svg)](https://galaxy.ansible.com/Oefenweb/redis)
 
-Set up the latest stable redis server in Ubuntu systems (using [Chris Lea's ppa](https://launchpad.net/~chris-lea/+archive/ubuntu/redis-server) or from source).
+Set up the latest stable redis server in Ubuntu systems (using [Chris Lea's ppa](https://launchpad.net/~chris-lea/+archive/ubuntu/redis-server), [Redis Lab's ppa](https://launchpad.net/~redislabs/+archive/ubuntu/redis) or from source).
 
 #### Requirements
 
