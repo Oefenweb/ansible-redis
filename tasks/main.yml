@@ -59,7 +59,7 @@
 
 - name: configure initd
   ansible.builtin.import_tasks: configure-initd.yml
-  when: ansible_service_mgr != 'systemd'
+  when: ansible_facts['service_mgr'] != 'systemd'
   tags:
     - configuration
     - redis
@@ -68,7 +68,7 @@
 
 - name: configure systemd
   ansible.builtin.import_tasks: configure-systemd.yml
-  when: ansible_service_mgr == 'systemd'
+  when: ansible_facts['service_mgr'] == 'systemd'
   tags:
     - configuration
     - redis

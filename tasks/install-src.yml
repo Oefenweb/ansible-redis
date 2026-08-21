@@ -33,7 +33,7 @@
 
 - name: install | src | make
   ansible.builtin.command: >
-    make -j{{ ansible_processor_cores + 1 }}
+    make -j{{ ansible_facts['processor_cores'] + 1 }}
   args:
     chdir: "{{ redis_checkout_path }}"
   when: _git_checkout is changed
